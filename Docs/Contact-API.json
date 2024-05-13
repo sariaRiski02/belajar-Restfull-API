@@ -1,0 +1,119 @@
+{
+    "openapi": "3.0.2",
+    "info":{
+        "title": "Contact API",
+        "description": "Contact API",
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/contacts":{
+            "post":{
+                "description": "Create a new contact",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ],
+                "requestBody":{
+                    "description": "Create a new contact",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "Firstname": {
+                                        "type": "string"
+                                    },
+                                    "Lastname": {
+                                        "type": "string"
+                                    },
+                                    "Email": {
+                                        "type": "string"
+                                    },
+                                    "Phone": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "Firstname": "John",
+                                "Lastname": "Doe",
+                                "Email": "JhonDoe123@gmail.com",
+                                "Phone": "1234567890"
+
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Contact created successfully",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "data":{
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "Firstname": {
+                                                    "type": "string"
+                                                },
+                                                "Lastname": {
+                                                    "type": "string"
+                                                },
+                                                "Email": {
+                                                    "type": "string"
+                                                },
+                                                "Phone": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "example": {
+                                                "id": 1,
+                                                "Firstname": "John",
+                                                "Lastname": "Doe",
+                                                "Email": "JhonDoe123@test.com",
+                                                "Phone": "1234567890"
+                                            }
+                                    
+
+                                        },
+                                        "error":{
+                                            "type": "object"
+                                        }
+                                    
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
+            },
+            "get":{
+                "description": "Search for contacts"
+            }
+        },
+        "/api/contacts/{id}":{
+            "put":{
+                "description": "Update a contact"
+
+                },
+            "get":{
+                "description": "Get a contact"
+            },
+            "delete":{
+                "description": "Delete a contact"
+            }
+         }
+    }
+}

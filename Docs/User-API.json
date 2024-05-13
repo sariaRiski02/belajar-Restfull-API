@@ -20,13 +20,13 @@
                                     "value":{
                                         "username":"testUsername",
                                         "password":"testPassowrd123",
-                                        "name" : "testName",
-                                        "email":"test123@test.com"
+                                        "name" : "testName"
+                                        
                                 }
                             }
                         },
                             "schema":{
-                                "required": ["username","password","email","name"],
+                                "required": ["username","password","name"],
                                 "type": "object",
                                 "properties": {
                                     "username":{
@@ -36,9 +36,6 @@
                                         "type": "string"
                                     },
                                     "password":{
-                                        "type": "string"
-                                    },
-                                    "email":{
                                         "type": "string"
                                     }
                                 }
@@ -58,8 +55,8 @@
                                             "data": {
                                                 "id": 1,
                                                 "username": "testUsername",
-                                                "name": "testName",
-                                                "email": "testEmail@test.com"
+                                                "name": "testName"
+                                                
                                             }
                                         }
 
@@ -108,10 +105,6 @@
                                                     "Password is required",
                                                     "Password must be at least 6 characters long"
 
-                                                ],
-                                                "email": [
-                                                    "Email is required",
-                                                    "Email must be a valid email"
                                                 ],
                                                 "name": [
                                                     "Name is required",
