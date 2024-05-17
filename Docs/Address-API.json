@@ -1,0 +1,24 @@
+{
+    "openapi":"3.0.2",
+    "info": {
+      "title":"Address API",
+      "version":"1.0"
+    },
+    "servers": [
+      {"url":"https://api.server.test/v1"}
+    ],
+    "paths": {
+        "/api/contacts/{idContact}/addresses":{
+            "post":{
+                "description": "Create a new address for a contact"
+
+            }
+        },
+        "/api/contacts/{idContact}/addresses/{idAddress}":{
+            "get":{
+                "description": "Get an address by id"
+            }
+        }
+        
+    }
+  }

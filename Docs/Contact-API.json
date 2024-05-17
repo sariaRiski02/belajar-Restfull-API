@@ -100,19 +100,228 @@
                 }
             },
             "get":{
-                "description": "Search for contacts"
+                "description": "Search for contacts",
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    }
+                ]
             }
         },
         "/api/contacts/{id}":{
             "put":{
-                "description": "Update a contact"
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
+                    }
+                
+                ],
+                "description": "Update a contact",
+                "requestBody":{
+                    "description": "Create a new contact",
+                    "content": {
+                        "application/json":{
+                            "schema":{
+                                "type": "object",
+                                "properties": {
+                                    "Firstname": {
+                                        "type": "string"
+                                    },
+                                    "Lastname": {
+                                        "type": "string"
+                                    },
+                                    "Email": {
+                                        "type": "string"
+                                    },
+                                    "Phone": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "example": {
+                                "Firstname": "John",
+                                "Lastname": "Doe",
+                                "Email": "JhonDoe123@gmail.com",
+                                "Phone": "1234567890"
+
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200":{
+                        "description": "Get contact successfully",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "data":{
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "number"
+                                                },
+                                                "Firstname": {
+                                                    "type": "string"
+                                                },
+                                                "Lastname": {
+                                                    "type": "string"
+                                                },
+                                                "Email": {
+                                                    "type": "string"
+                                                },
+                                                "Phone": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "example": {
+                                                "id": 1,
+                                                "Firstname": "John",
+                                                "Lastname": "Doe",
+                                                "Email": "JhonDoe123@test.com",
+                                                "Phone": "1234567890"
+                                            }
+                                    
+
+                                        },
+                                        "error":{
+                                            "type": "object"
+                                        }
+                                    
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
 
                 },
             "get":{
-                "description": "Get a contact"
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query"
+
+                    },
+                    {
+                        "name": "email",
+                        "in": "query"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query"
+                    }
+                ],
+                "description": "success search contacts",
+                "responses": {
+                    "200":{
+                        "description": "success search",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items":{
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "number"
+                                                    },
+                                                    "Firstname": {
+                                                        "type": "string"
+                                                    },
+                                                    "Lastname": {
+                                                        "type": "string"
+                                                    },
+                                                    "Email": {
+                                                        "type": "string"
+                                                    },
+                                                    "Phone": {
+                                                        "type": "string"
+                                                    }
+                                                },
+                                                "example": {
+                                                    "id": 1,
+                                                    "Firstname": "John",
+                                                    "Lastname": "Doe",
+                                                    "Email": "JhonDoe123@test.com",
+                                                    "Phone": "1234567890"
+                                                }
+                                            }
+                                            
+                                    
+
+                                        },
+                                        "error":{
+                                            "type": "object"
+                                        }
+                                    
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
             },
             "delete":{
-                "description": "Delete a contact"
+                "parameters": [
+                    {
+                        "name": "Authorization",
+                        "in": "header"
+                    },
+                    {
+                        "name": "id",
+                        "in": "path"
+                    }
+                ],
+                "description": "Delete a contact",
+                "responses": {
+                    "200":{
+                        "description": "Delete contact successfully",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "data":{
+                                            "type": "boolean"
+                                        },
+                                        "error":{
+                                            "type": "object"
+                                        }
+                                    
+                                }
+                            }
+                        }
+                    }
+                    }
+                }
+                
             }
          }
     }
