@@ -14,6 +14,9 @@ class User extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    protected $guarded = [
+        'id'
+    ];
 
     public function contacts()
     {
