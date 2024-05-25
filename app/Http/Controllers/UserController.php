@@ -84,4 +84,17 @@ class UserController extends Controller
 
         return new UserResource($user);
     }
+
+    public function logout()
+    {
+        $user = Auth::user();
+        if ($user instanceof User) {
+            $user->token = null;
+            $user->save();
+        }
+
+        return response([
+            "data" => true
+        ]);
+    }
 }

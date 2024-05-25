@@ -193,8 +193,7 @@ class UserTest extends TestCase
                 ]
             ]);
     }
-
-    public function test_UpdateUser()
+    public function test_UpdateUserSuccess()
     {
         $this->seed([UserSeeder::class]);
         $this->patch('/api/users/current', [
@@ -207,6 +206,55 @@ class UserTest extends TestCase
                     "name" => "ganti",
                     "username" => "test",
                     "token" => "test"
+                ]
+            ]);
+    }
+
+    public function test_UpdateUserFailed()
+    {
+        $this->seed([UserSeeder::class]);
+        $this->patch('/api/users/current', [
+            "name" => "ganti",
+            "password" => "ganti"
+        ])
+            ->assertStatus(401)
+            ->assertJson([
+                "errors" => [
+                    "message" => [
+                        "Unauthorized"
+                    ]
+                ]
+            ]);
+    }
+
+
+    public function test_logoutSuccess()
+    {
+
+        $this->seed([UserSeeder::class]);
+
+        $this->delete(uri: '/api/users/logout', headers: [
+            "Authorization" => "test"
+        ])->assertJson([
+            "data" => true
+        ]);
+
+        $this->assertDatabaseMissing(table: 'users', data: [
+            "token" => "test"
+        ]);
+    }
+
+    public function test_logutFailed()
+    {
+        $this->delete(uri: '/api/users/logout', headers: [
+            "Authorization" => "salah"
+        ])
+            ->assertStatus(401)
+            ->assertJson([
+                "errors" => [
+                    "message" => [
+                        "Unauthorized"
+                    ]
                 ]
             ]);
     }
