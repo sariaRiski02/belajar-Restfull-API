@@ -244,7 +244,7 @@ class UserTest extends TestCase
         ]);
     }
 
-    public function test_logutFailed()
+    public function test_logoutFailed()
     {
         $this->delete(uri: '/api/users/logout', headers: [
             "Authorization" => "salah"

@@ -18,6 +18,7 @@
                     {
                         "name": "Authorization",
                         "in": "header"
+
                     }
                 ],
                 "requestBody":{
@@ -212,33 +213,13 @@
                     {
                         "name": "id",
                         "in": "path"
-                    },
-                    {
-                        "name": "name",
-                        "in": "query"
-
-                    },
-                    {
-                        "name": "email",
-                        "in": "query"
-                    },
-                    {
-                        "name": "phone",
-                        "in": "query"
-                    },
-                    {
-                        "name": "page",
-                        "in": "query"
-                    },
-                    {
-                        "name": "size",
-                        "in": "query"
                     }
                 ],
-                "description": "success search contacts",
+                
+                "description": "get contact by id",
                 "responses": {
                     "200":{
-                        "description": "success search",
+                        "description": "success get contact",
                         "content": {
                             "application/json":{
                                 "schema":{
