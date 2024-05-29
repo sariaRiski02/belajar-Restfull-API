@@ -15,6 +15,8 @@ Route::post('/users', [UserController::class, 'register']);
 Route::post('/users/login', [UserController::class, 'login']);
 
 Route::middleware(ApiAuthMiddleware::class)->group(function () {
+
+    // route for users
     Route::get('/users/current', [UserController::class, 'get']);
     Route::patch('/users/current', [UserController::class, 'update']);
     Route::delete('/users/logout', [UserController::class, 'logout']);
@@ -24,4 +26,8 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::get('/contacts/{id}', [ContactController::class, 'get']);
     Route::put('/contacts/{id}', [ContactController::class, 'update']);
     Route::delete('/contacts/{id}', [ContactController::class, "delete"]);
+    Route::get('/contacts', [ContactController::class, 'search']);
+
+    // route for address
+
 });

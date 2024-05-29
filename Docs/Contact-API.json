@@ -106,8 +106,73 @@
                     {
                         "name": "Authorization",
                         "in": "header"
+                    },
+                    {
+                        "name": "name",
+                        "in": "query"
+                    },
+                    {
+                        "name": "phone",
+                        "in": "query"
+                    },
+                    {
+                        "name": "email",
+                        "in": "query"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query"
+                    },
+                    {
+                        "name": "page",
+                        "in": "query"
                     }
-                ]
+                ],
+                "responses": {
+                    "200":{
+                        "description": "Success search contacts",
+                        "content": {
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties": {
+                                        "data":{
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id":{
+                                                        "type": "number"
+                                                    },
+                                                    "firstname":{
+                                                        "type": "string"
+                                                    },
+                                                    "lastname":{
+                                                        "type": "string"
+                                                    },
+                                                    "email":{
+                                                        "type": "string"
+                                                    },
+                                                    "phone":{
+                                                        "type": "string"
+                                                    },
+                                                    "errors":{
+                                                        "type": "object"
+                                                    },
+                                                    "meta":{
+                                                        "type": "object"
+                                                    }
+
+                                                }
+                                            }
+                                        
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         },
         "/api/contacts/{id}":{

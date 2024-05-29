@@ -15,6 +15,12 @@ class Address extends Model
     public $incrementing = true;
     public $timestamps = true;
 
+    protected $guarded = [
+        'id',
+        'created_at',
+        'updated_at',
+    ];
+
     public function contact()
     {
         return $this->belongsTo(Contact::class, "contact_id", "id");
