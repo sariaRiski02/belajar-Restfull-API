@@ -22,13 +22,26 @@ class AddressController extends Controller
         if ($contact == null) {
             return response()->json([
                 'message' => 'Contact not found'
-            ], 404);
+            ], 400);
         }
 
         $address = new Address($data);
         $address->contact_id = $contact->id;
         $address->save();
 
+        return new AddressResource($address);
+    }
+
+    public function get(int $contactId, int $addressId)
+    {
+        $user = Auth::user();
+        $contact = Contact::where('id', $contactId)->where('user_id', $user->id)->first();
+        if (!$contact) {
+            return response([
+                "message" => "Contact not found"
+            ]);
+        }
+        $address = $contact->address->where('id', $addressId);
         return new AddressResource($address);
     }
 }

@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\ApiAuthMiddleware;
+use App\Http\Controllers\AddressController;
 use App\Http\Controllers\ContactController;
 
 // Route::get('/user', function (Request $request) {
@@ -29,5 +30,6 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     Route::get('/contacts', [ContactController::class, 'search']);
 
     // route for address
-
+    Route::post('/contacts/{contactId}/addresses', [AddressController::class, 'create']);
+    Route::get('/contacts/{contactId}/addresses/{addressId}', [AddressController::class, 'get']);
 });

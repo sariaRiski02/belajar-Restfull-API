@@ -2,8 +2,11 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class AddressCreateRequest extends FormRequest
 {
@@ -29,5 +32,14 @@ class AddressCreateRequest extends FormRequest
             'country' => 'required|string|max:255',
             'postal_code' => 'string|max:255',
         ];
+    }
+
+    protected function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(response([
+            'errors' => [
+                'messages' => $validator->getMessageBag()
+            ]
+        ], 400));
     }
 }
