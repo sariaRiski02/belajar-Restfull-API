@@ -1,66 +1,235 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Tentu! Berikut adalah README.md yang lebih terperinci dan berwarna untuk proyek Anda:
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+````markdown
+# 🌐 User Management API Documentation
 
-## About Laravel
+API ini dirancang untuk menyederhanakan pengelolaan pengguna, kontak, dan alamat dalam aplikasi Anda. Dengan API ini, Anda dapat dengan mudah:
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Manajemen Pengguna:
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+-   👤 Membuat, membaca, memperbarui, dan menghapus data pengguna (CRUD).
+-   🔒 Autentikasi dan otorisasi pengguna.
+-   🛡️ Mengelola peran dan izin pengguna.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### Manajemen Kontak:
 
-## Learning Laravel
+-   📇 Menambahkan, melihat, mengedit, dan menghapus kontak pengguna.
+-   📧 Mengelola informasi kontak seperti nama, email, nomor telepon, dll.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### Manajemen Alamat:
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+-   🏠 Menambahkan, melihat, mengedit, dan menghapus alamat pengguna.
+-   🗺️ Mengelola informasi alamat seperti jalan, kota, negara, kode pos, dll.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Endpoints
 
-## Laravel Sponsors
+### 🔑 Autentikasi
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+API ini menggunakan **Bearer Token**. Untuk mendapatkan token, kirim permintaan POST ke `/api/users/login` dengan kredensial yang valid. Sertakan token ini dalam header `Authorization` untuk setiap permintaan yang memerlukan autentikasi.
 
-### Premium Partners
+### Manajemen Pengguna
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+#### Register New User
 
-## Contributing
+**URL:** `/api/users`  
+**Method:** `POST`  
+**Description:** Register a new user.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+**Request Body:**
 
-## Code of Conduct
+```json
+{
+    "username": "string",
+    "password": "string",
+    "name": "string"
+}
+```
+````
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+**Example Request:**
 
-## Security Vulnerabilities
+```json
+{
+    "username": "testUsername",
+    "password": "testPassowrd123",
+    "name": "testName"
+}
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Responses:**
 
-## License
+-   **201 Created**
+    -   **Description:** User Registered Successfully
+    -   **Example:**
+        ```json
+        {
+            "data": {
+                "id": 1,
+                "username": "testUsername",
+                "name": "testName"
+            }
+        }
+        ```
+-   **400 Bad Request**
+    -   **Description:** Validation Error
+    -   **Example:**
+        ```json
+        {
+            "errors": {
+                "username": [
+                    "Username is required",
+                    "username cannot contain spaces"
+                ],
+                "password": [
+                    "Password is required",
+                    "Password must be at least 6 characters long"
+                ],
+                "name": [
+                    "Name is required",
+                    "Name must be at least 3 characters long"
+                ]
+            }
+        }
+        ```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Login User
+
+**URL:** `/api/users/login`  
+**Method:** `POST`  
+**Description:** Login a user.
+
+**Request Body:**
+
+```json
+{
+    "username": "string",
+    "password": "string"
+}
+```
+
+**Responses:**
+
+-   **200 OK**
+    -   **Description:** User logged in successfully
+    -   **Example:**
+        ```json
+        {
+            "data": {
+                "id": 1,
+                "username": "testUsername",
+                "name": "testName",
+                "token": "string"
+            }
+        }
+        ```
+
+#### Get Current User
+
+**URL:** `/api/users/current`  
+**Method:** `GET`  
+**Description:** Get the current authenticated user.
+
+**Headers:**
+
+-   `Authorization`: Bearer token
+
+**Responses:**
+
+-   **200 OK**
+    -   **Description:** User retrieved successfully
+    -   **Example:**
+        ```json
+        {
+            "data": {
+                "id": 1,
+                "username": "testUsername",
+                "name": "testName"
+            }
+        }
+        ```
+-   **401 Unauthorized**
+    -   **Description:** Unauthorized access
+
+#### Update Current User
+
+**URL:** `/api/users/current`  
+**Method:** `PATCH`  
+**Description:** Update the current authenticated user.
+
+**Headers:**
+
+-   `Authorization`: Bearer token
+
+**Request Body:**
+
+```json
+{
+    "name": "string",
+    "password": "string"
+}
+```
+
+**Responses:**
+
+-   **200 OK**
+    -   **Description:** User updated successfully
+    -   **Example:**
+        ```json
+        {
+            "data": {
+                "id": 1,
+                "username": "testUsername",
+                "name": "testName"
+            }
+        }
+        ```
+-   **401 Unauthorized**
+    -   **Description:** Unauthorized access
+
+#### Logout User
+
+**URL:** `/api/users/logout`  
+**Method:** `DELETE`  
+**Description:** Logout the current authenticated user.
+
+**Headers:**
+
+-   `Authorization`: Bearer token
+
+**Responses:**
+
+-   **200 OK**
+    -   **Description:** User logged out successfully
+    -   **Example:**
+        ```json
+        {
+            "data": true
+        }
+        ```
+
+### 📇 Manajemen Kontak
+
+Detail dokumentasi untuk manajemen kontak dapat ditemukan di file `Docs/Contact-API.json`.
+
+### 🏠 Manajemen Alamat
+
+Detail dokumentasi untuk manajemen alamat dapat ditemukan di file `Docs/Address-API.json`.
+
+## 📂 OpenAPI Specification
+
+Dokumentasi lengkap dapat dilihat menggunakan OpenAPI Extension dan file JSON berikut:
+
+1. `Docs/Address-API.json`
+2. `Docs/Contact-API.json`
+3. `Docs/User-API.json`
+
+Gunakan ekstensi OpenAPI di IDE pilihan Anda untuk melihat dokumentasi API dengan lebih rinci.
+
+---
+
+Dengan dokumentasi ini, Anda memiliki semua yang Anda butuhkan untuk mulai bekerja dengan API Pengelolaan Pengguna, Kontak, dan Alamat dalam aplikasi Anda. 🚀
+
+```
+
+Anda dapat menambahkan atau mengubah bagian sesuai kebutuhan proyek Anda. Dokumentasi ini memberikan gambaran lengkap tentang API Anda dan cara penggunaannya, lengkap dengan contoh dan penjelasan.
+```
