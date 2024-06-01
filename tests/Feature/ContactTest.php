@@ -280,6 +280,7 @@ class ContactTest extends TestCase
         $response->assertJson([
             "data" => true
         ]);
+        
     }
 
     public function test_SearchByFirstName()

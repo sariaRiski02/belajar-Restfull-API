@@ -32,4 +32,7 @@ Route::middleware(ApiAuthMiddleware::class)->group(function () {
     // route for address
     Route::post('/contacts/{contactId}/addresses', [AddressController::class, 'create']);
     Route::get('/contacts/{contactId}/addresses/{addressId}', [AddressController::class, 'get']);
+    Route::put('/contacts/{contactId}/addresses/{addressId}', [AddressController::class, 'update']);
+    Route::delete('/contacts/{contactId}/addresses/{addressId}', [AddressController::class, 'delete']);
+    Route::get('/contacts/{contactId}/addresses', [AddressController::class, 'list']);
 });

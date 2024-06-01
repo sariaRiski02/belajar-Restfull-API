@@ -78,6 +78,9 @@ class UserController extends Controller
         if (isset($data['password'])) {
             $user->password = Hash::make($data['password']);
         }
+        if (isset($data['username'])) {
+            $user->username = $data['username'];
+        }
         if ($user instanceof User) {
             $user->save();
         }

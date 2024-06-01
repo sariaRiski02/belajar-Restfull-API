@@ -70,7 +70,7 @@ class ContactController extends Controller
     {
         $user = Auth::user();
 
-        $contact = Contact::where('id', $id)->where('id_user', $user->id);
+        $contact = Contact::where('id', $id)->where('user_id', $user->id)->first();
         if (!$contact) {
             return response()->json([
                 "errors" => [
@@ -79,6 +79,7 @@ class ContactController extends Controller
             ])->setStatusCode(404);
         }
 
+        $contact->delete();
         return response()->json([
             "data" => true
         ]);

@@ -2,16 +2,17 @@
 
 namespace App\Http\Requests;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserUpdateRequest extends FormRequest
+class AddressUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return $this->user() != null;
+        return Auth::user() != null;
     }
 
     /**
@@ -22,9 +23,11 @@ class UserUpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => ["nullable", "max:100"],
-            "username" => ["nullable", "max:100"],
-            "password" => ["nullable", "max:100"]
+            'street' => ['string'],
+            'city' => ['string'],
+            'province' => ['string'],
+            'country' => ['string', 'required'],
+            'postal_code' => ['string'],
         ];
     }
 }

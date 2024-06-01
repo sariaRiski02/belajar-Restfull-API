@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Resources\AddressResource;
 use App\Http\Requests\AddressCreateRequest;
+use App\Http\Requests\AddressUpdateRequest;
 
 class AddressController extends Controller
 {
@@ -41,7 +42,75 @@ class AddressController extends Controller
                 "message" => "Contact not found"
             ]);
         }
-        $address = $contact->address->where('id', $addressId);
+        $address = $contact->address()->where('id', $addressId)->first();
+        if (!$address) {
+            return response([
+                'message' => "Address not found"
+            ]);
+        }
+
+
+
         return new AddressResource($address);
+    }
+
+    public function update(int $contactId, int $addressId, AddressUpdateRequest $request)
+    {
+        $user = Auth::user();
+        $contact = Contact::where('id', $contactId)->where('user_id', $user->id)->first();
+
+        if (!$contact) {
+            return response([
+                "message" => "Contact not found"
+            ]);
+        }
+        $address = $contact->address()->where('id', $addressId)->first();
+        if (!$address) {
+            return response([
+                'message' => "Address not found"
+            ]);
+        }
+
+        $data = $request->validated();
+        $address->update($data);
+
+        return new AddressResource($address);
+    }
+
+    public function delete(int $contactId, int $addressId)
+    {
+        $user = Auth::user();
+        $contact = Contact::where('id', $contactId)->where('user_id', $user->id)->first();
+
+        if (!$contact) {
+            return response([
+                "message" => "Contact not found"
+            ]);
+        }
+        $address = $contact->address()->where('id', $addressId)->first();
+        if (!$address) {
+            return response([
+                'message' => "Address not found"
+            ]);
+        }
+
+        $address->delete();
+
+        return true;
+    }
+
+    public function list(int $contactId)
+    {
+        $user = Auth::user();
+        $contact = Contact::where('id', $contactId)->where('user_id', $user->id)->first();
+        if (!$contact) {
+            return response([
+                "message" => "Contact not found"
+            ]);
+        }
+        $address = $contact->address()->get();
+
+
+        return AddressResource::collection($address);
     }
 }
